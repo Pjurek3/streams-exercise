@@ -41,6 +41,7 @@ class StreamProcessor(object):
 
     You can see the `tests.py` file for more examples of expected outcomes.
     """
+    READ_LENGTH = 2
 
     def __init__(self, stream):
         self._stream = stream
@@ -57,11 +58,30 @@ class StreamProcessor(object):
         total = 0  # The running total of sums.
 
         # TODO: WRITE CODE HERE:
+        test_end_file = True
+        test_summation = True
+        test_count = True
 
-        # Just some example syntax, you can read two digits from the head of the
-        # stream using the following code:
-        #
-        # digits = self._stream.read(2)
+        while (test_end_file & test_summation & test_count):
+            read_digits = self._stream.read(2)
+            digit_count = len(read_digits)
+            if read_digits:
+               digit_value = int(read_digits)
+            else:
+               digit_value = 0
+
+            total += digit_value
+
+            if digit_count < self.READ_LENGTH:
+               test_end_file = False
+            else:
+               count += 1
+            
+            if total >= 200:
+               test_summation = False
+            
+            if count >= 10:
+               test_count = False
 
 
         return count
